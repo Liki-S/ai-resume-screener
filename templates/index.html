@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resume Screener</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background: #f9f9f9;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 500px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        p {
+            background: #eaf2f8;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Resume Screener</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Job Description:</label><br><br>
+<textarea name="job_desc" rows="6" cols="50"></textarea><br><br>
+        <label>Upload Resumes:</label><br><br>
+        <input type="file" name="resumes" multiple><br><br>
+        <input type="submit" value="Screen Resumes">
+    </form>
+
+    <hr>
+
+    {% if results %}
+        <h2>Results:</h2>
+        {% for r in results %}
+            <p>
+                <b>#{{ r.rank }} {{ r.name }}</b>
+                Score: {{ r.score }}<br>
+                Skills: {{ r.skills }}
+            </p>
+        {% endfor %}
+    {% endif %}
+
+</body>
+</html>
